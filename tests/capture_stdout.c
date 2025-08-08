@@ -40,5 +40,39 @@ int start_capture_stdout(void)
 
 char *close_capture_stdout(void)
 {
+	char buffer = malloc(BUFF_SIZE);
+	
+	if (buffer == NULL)
+	{
+		perror("malloc failed");
+		close(pipefd[0]);
+		close(saved_stdout);
+		return (NULL);
+	}
 
+	if (fflush(stdout) == EOF)
+	{
+		perror("fflush failed");
+		close(pipefd[0]);
+		close(saved_stdout);
+		free(buffer);
+		return (NULL);
+	}
+
+	close(pipefd[1]);
+	if(dup2(saved_stdout, STDOUT_FILENO))
+	{
+		perror("dup2 failed");
+		close(pipefd[0]);
+		close(saved_stdout);
+		free(buffer);
+		return (NULL);
+	}
+
+	close(saved_stdout);
+
+	while (read(ppipefd[1], buffer, BUFF_SIZE) != 0)
+	{
+
+	}
 }
