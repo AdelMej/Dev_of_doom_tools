@@ -22,5 +22,9 @@
 !Unity/
 !Unity/**
 
+# Un-ignore holberton folder and all files inside recursively
+!holberton/
+!holberton/**
+
 # Ignore build output folder
 build/
