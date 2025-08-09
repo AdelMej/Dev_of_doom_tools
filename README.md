@@ -18,15 +18,18 @@ A template project for building and testing C programs following Holberton-style
 ```yaml
 Dev_of_doom_tools/
 ├── holberton/
-│ └── -main.c # Holberton main source files
+│   └── 999-main.c        # Holberton main source files
 ├── tests/
-│ ├── test_.c # Unit test source files
-│ ├── capture_stdout.c # Capture stdout helper
-│ └── capture_stderr.c # Capture stderr helper
-├── obj/ # Object files (generated)
-├── build/ # Binaries (generated)
+│   ├── test_*.c          # Unit test source files
+│   ├── template.c        # Basic empty test template
+│   ├── capture.c         # Capture helper implementations
+│   └── capture.h         # Capture helper declarations
+├── obj/                  # Object files (generated)
+├── build/                # Binaries (generated)
+├── main.c                # Simple hello world main
 ├── Makefile
 └── .gitignore
+
 ```
 
 
