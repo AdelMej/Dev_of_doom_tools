@@ -18,6 +18,10 @@ MAIN_OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(notdir $(MAIN_SRCS)))
 #custom main.c
 MY_MAIN_BIN = $(BUILD)/my_main
 
+# List of all your .c source files except tests
+SRC_BETTY = $(filter-out tests/%, $(wildcard *.c) holberton/*.c)
+HDRS = $(wildcard *.h)
+
 #.c files and .o files
 #main.c and -main.c
 SRC_ALL = $(wildcard *.c)
@@ -36,13 +40,11 @@ CAPTURE_OBJS = $(patsubst tests/%.c, $(OBJDIR)/%.o, $(CAPTURE_SRC))
 TESTS = $(wildcard tests/test_*.c)
 TEST_BINS = $(strip $(patsubst tests/%.c, $(TEST_BUILD)/%, $(TESTS)))
 
-#capture stdout .c and .o files
-CAPTURE_SRC = tests/capture_stdout.c tests/capture_stderr.c
-CAPTURE_OBJS = $(patsubst tests/%.c, $(OBJDIR)/%.o, $(CAPTURE_SRC))
+.PHONY: all clean test run-tests run-% help valgrind-tests betty
 
-.PHONY: all clean test run-tests run-% help valgrind-tests
+.PRECIOUS: $(OBJS) $(MAIN_OBJS) $(CAPTURE_OBJS) $(UNITY_OBJ)
 
-all: $(MAIN_BINS) $(MY_MAIN_BIN) test
+all: betty $(MAIN_BINS) $(MY_MAIN_BIN) test
 
 #generate test if they exist binaries if .c exist
 test:
@@ -121,7 +123,12 @@ $(BUILD):
 $(TEST_BUILD):
 	mkdir -p $(TEST_BUILD)
 
-#delete the binary directory if it doesn't exist
+#run betty on everything
+betty:
+	@echo "Running Betty style check..."
+	betty $(SRC_BETTY) $(HDRS)
+
+#delete the binary directory and object directory
 clean:
 	rm -rf $(BUILD) $(OBJDIR)
 
@@ -132,11 +139,4 @@ help:
 	@echo "  test   - Run unit tests"
 	@echo "  run-%  - Run a specific test"
 	@echo "  valgrind-tests - Run all tests under Valgrind"
-
-debug:
-	@printf "MAIN_SRCS:\n"
-	@printf "[%s]\n" $(MAIN_SRCS)
-	@printf "MAIN_BINS:\n"
-	@printf "[%s]\n" $(MAIN_BINS)
-	@printf "OBJS:\n"
-	@printf "[%s]\n" $(OBJS)
+	@echo "  betty  - Run Betty style checks"
