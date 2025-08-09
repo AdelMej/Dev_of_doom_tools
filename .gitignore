@@ -4,9 +4,6 @@
 # Un-ignore all .c files
 !*.c
 
-# But ignore all *-main.c files explicitly
-*-main.c
-
 # Un-ignore specific header files and other needed files
 !binary_trees.h
 !README.md
