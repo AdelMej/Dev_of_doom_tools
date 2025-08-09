@@ -98,7 +98,4 @@ Check out the [Trello Template Board](https://trello.com/b/GjTcHyyT/template) to
 
 For detailed instructions on how to set up and use Trello for your projects, see the [Trello Setup Guide](https://github.com/AdelMej/Dev_of_doom_tools/blob/main/TRELLO_GUIDE.md) (replace with your actual guide URL).
 
-Happy organizing! 📅🛠️
-
-
 Happy coding! 💻🔥 Tools for the fallen you'll find all you need to fight against c shenanigans
