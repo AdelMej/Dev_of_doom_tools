@@ -1,5 +1,6 @@
 #include "../Unity/unity.h"
 #include "capture.h"
+#include <stdlib.h>
 
 void setUp(void)
 {
@@ -14,9 +15,9 @@ void test_sample(void)
 	char * res;
 	int capture = start_capture_stdout();
 	if (capture == -1)
-		exit(12):
+		exit(12);
 
-	print("We are cooking \n");
+	printf("We are cooking \n");
 
 	res = close_capture_stdout();
 	TEST_ASSERT_EQUAL_STRING("We are cooking \n", res);

@@ -8,10 +8,12 @@ UNITY_CFLAGS = -Wall -Wextra -Werror -pedantic -std=gnu99 -IUnity
 BUILD = build
 OBJDIR = obj
 HOLBERTON_DIR = holberton
+TEST_BUILD = $(BUILD)/tests
 
 #holberton main files
-MAIN_SRCS = $(wildcard $HOLBERTON_DIR/*-main.c)
+MAIN_SRCS = $(strip $(wildcard $(HOLBERTON_DIR)/*-main.c))
 MAIN_BINS = $(patsubst %.c, $(BUILD)/%, $(notdir $(MAIN_SRCS)))
+MAIN_OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(notdir $(MAIN_SRCS)))
 
 #custom main.c
 MY_MAIN_BIN = $(BUILD)/my_main
@@ -26,9 +28,13 @@ OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))
 UNITY_OBJ = $(OBJDIR)/unity.o
 UNITY_SRC = Unity/unity.c
 
+#capture stdout .c and .o files
+CAPTURE_SRC = tests/capture_stdout.c tests/capture_stderr.c
+CAPTURE_OBJS = $(patsubst tests/%.c, $(OBJDIR)/%.o, $(CAPTURE_SRC))
+
 #tests .c and .o files
 TESTS = $(wildcard tests/test_*.c)
-TEST_BINS = $(strip $(patsubst tests/%.c, $(BUILD)/%, $(TESTS)))
+TEST_BINS = $(strip $(patsubst tests/%.c, $(TEST_BUILD)/%, $(TESTS)))
 
 #capture stdout .c and .o files
 CAPTURE_SRC = tests/capture_stdout.c tests/capture_stderr.c
@@ -71,16 +77,12 @@ valgrind-tests: $(TEST_BINS)
 		fi; \
 	done
 
-#generating binaries for main
-$(BUILD)/%: $(HOLBERTON_DIR)/%-main.c $(OBJS) | $(BUILD)
-	$(CC) $(CFLAGS) $^ -o $@
-
 #generate binaries for main.c
 $(MY_MAIN_BIN): $(OBJDIR)/main.o $(OBJS) | $(BUILD)
 	$(CC) $(CFLAGS) $^ -o $@
 
-# build test binaries
-$(BUILD)/%: tests/%.c $(OBJS) $(UNITY_OBJ) $(CAPTURE_OBJS) | $(BUILD)
+# Build binaries for tests
+$(TEST_BUILD)/%: tests/%.c $(OBJS) $(UNITY_OBJ) $(CAPTURE_OBJS) | $(TEST_BUILD)
 	$(CC) $(UNITY_CFLAGS) $^ -o $@
 
 #generating .o files for unity
@@ -88,7 +90,11 @@ $(UNITY_OBJ): $(UNITY_SRC) | $(OBJDIR)
 	$(CC) $(UNITY_CFLAGS) -c $< -o $@
 
 #generating .o files in obj/
-$(OBJDIR)/%.o: %.c | $(OBJDIR)
+$(BUILD)/%: $(OBJDIR)/%.o $(OBJS) | $(BUILD)
+	$(CC) $(CFLAGS) $^ -o $@
+
+#generating .o files for holberton files
+$(OBJDIR)/%.o: $(HOLBERTON_DIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #generate .o files from tests
@@ -111,6 +117,10 @@ $(OBJDIR):
 $(BUILD):
 	mkdir -p $(BUILD)
 
+# Create test build directory
+$(TEST_BUILD):
+	mkdir -p $(TEST_BUILD)
+
 #delete the binary directory if it doesn't exist
 clean:
 	rm -rf $(BUILD) $(OBJDIR)
@@ -123,6 +133,10 @@ help:
 	@echo "  run-%  - Run a specific test"
 	@echo "  valgrind-tests - Run all tests under Valgrind"
 
-print-tests:
-	@echo "TESTS: $(TESTS)"
-	@echo "TEST_BINS: $(TEST_BINS)"
+debug:
+	@printf "MAIN_SRCS:\n"
+	@printf "[%s]\n" $(MAIN_SRCS)
+	@printf "MAIN_BINS:\n"
+	@printf "[%s]\n" $(MAIN_BINS)
+	@printf "OBJS:\n"
+	@printf "[%s]\n" $(OBJS)
