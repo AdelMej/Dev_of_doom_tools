@@ -10,6 +10,7 @@
 !TRELLO_GUIDE.md
 !.gitignore
 !Makefile
+!.gitattributes
 
 # Un-ignore tests folder and all files inside recursively
 !tests/
