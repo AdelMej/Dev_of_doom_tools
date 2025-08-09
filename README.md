@@ -41,6 +41,8 @@ Dev_of_doom_tools/
 
 ```bash
 make
+```
+
 Compiles all Holberton mains and tests, producing executables in the build/ folder.
 
 Run tests ✅❌
