@@ -45,41 +45,41 @@ make
 
 Compiles all Holberton mains and tests, producing executables in the build/ folder.
 
-Run tests ✅❌
+### Run tests ✅❌
 ```bash
 make test
 ```
 
 Runs all unit tests, showing pass/fail status.
 
-Run a specific test 🎯
+### Run a specific test 🎯
 ```bash
 make run-test_testname
 ```
 
 Example:
-
 ```bash
 make run-test_test_capture
 ```
 
-Clean build files 🧹
+### Clean build files 🧹
 ```bash
 make clean
 ```
+
 Removes all generated object files and binaries.
 
 ---
 
 ## 📦 Template Files Included
 
-- `tests/template.c` — A basic empty test file to help you get started quickly 🧪✨  
-- `holberton/999-main.c` — A placeholder main file for Holberton-style compilation practice 🕹️  
-- `main.c` — A simple program that prints "Hello, World" for sanity checking your build setup 👋🌍  
+- `tests/template.c` — A basic empty test file to help you get started quickly 🧪✨
+- `holberton/999-main.c` — A placeholder main file for Holberton-style compilation practice 🕹️
+- `main.c` — A simple program that prints "Hello, World" for sanity checking your build setup 👋🌍
 
 These templates make it easy to test your setup and add new features or tests without starting from scratch.
 
-📝 Notes
+## 📝 Notes
 🔍 The Makefile auto-detects Holberton main files in holberton/ and test files in tests/.
 
 📂 Object files go to obj/, and executables go to build/.
@@ -96,6 +96,7 @@ To keep track of tasks, bugs, and features efficiently, we use a Trello template
 
 Check out the [Trello Template Board](https://trello.com/b/GjTcHyyT/template) to get started with the same workflow, labels, and card templates! Feel free to copy it and customize it for your own projects. 🚀✨
 
-For detailed instructions on how to set up and use Trello for your projects, see the [Trello Setup Guide](https://github.com/AdelMej/Dev_of_doom_tools/blob/main/TRELLO_GUIDE.md) (replace with your actual guide URL).
+For detailed instructions on how to set up and use Trello for your projects, see the [Trello Setup Guide](https://gist.github.com/yourusername/yourgistid).
+
 
 Happy coding! 💻🔥 Tools for the fallen you'll find all you need to fight against c shenanigans
