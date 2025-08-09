@@ -15,7 +15,8 @@ A template project for building and testing C programs following Holberton-style
 ---
 
 ## 🗂️ Project Structure
-
+```yaml
+```
 Dev_of_doom_tools/
 ├── holberton/
 │ └── -main.c # Holberton main source files
@@ -27,10 +28,9 @@ Dev_of_doom_tools/
 ├── build/ # Binaries (generated)
 ├── Makefile
 └── .gitignore
+```
+```
 
-yaml
-Copier
-Modifier
 
 ---
 
@@ -43,28 +43,27 @@ make
 Compiles all Holberton mains and tests, producing executables in the build/ folder.
 
 Run tests ✅❌
-bash
-Copier
-Modifier
+```bash
 make test
+```
+
 Runs all unit tests, showing pass/fail status.
 
 Run a specific test 🎯
-bash
-Copier
-Modifier
+```bash
 make run-test_testname
+```
+
 Example:
 
-bash
-Copier
-Modifier
+```bash
 make run-test_test_capture
+```
+
 Clean build files 🧹
-bash
-Copier
-Modifier
+```bash
 make clean
+```
 Removes all generated object files and binaries.
 
 ---
