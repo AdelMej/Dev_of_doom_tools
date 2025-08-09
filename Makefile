@@ -17,13 +17,22 @@ MAIN_BINS = $(patsubst %.c, $(BUILD)/%, $(notdir $(MAIN_SRCS)))
 MY_MAIN_BIN = $(BUILD)/my_main
 
 #.c files and .o files
+#main.c and -main.c
 SRC_ALL = $(wildcard *.c)
-SRC = $(filter-out %-main.c, $(SRC_ALL))
+SRC = $(filter-out %-main.c main.c, $(SRC_ALL))
 OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))
+
+#unity .c and .o files
 UNITY_OBJ = $(OBJDIR)/unity.o
 UNITY_SRC = Unity/unity.c
+
+#tests .c and .o files
 TESTS = $(wildcard tests/test_*.c)
 TEST_BINS = $(strip $(patsubst tests/%.c, $(BUILD)/%, $(TESTS)))
+
+#capture stdout .c and .o files
+CAPTURE_SRC = tests/capture_stdout.c tests/capture_stderr.c
+CAPTURE_OBJS = $(patsubst tests/%.c, $(OBJDIR)/%.o, $(CAPTURE_SRC))
 
 .PHONY: all clean test run-tests run-% help valgrind-tests
 
@@ -67,19 +76,27 @@ $(BUILD)/%: $(HOLBERTON_DIR)/%-main.c $(OBJS) | $(BUILD)
 	$(CC) $(CFLAGS) $^ -o $@
 
 #generate binaries for main.c
-$(MY_MAIN_BIN): main.c $(OBJS) | $(BUILD)
-	$(CC) $(CFLAGS) $^ -o $@	
+$(MY_MAIN_BIN): $(OBJDIR)/main.o $(OBJS) | $(BUILD)
+	$(CC) $(CFLAGS) $^ -o $@
 
 # build test binaries
-$(BUILD)/%: tests/%.c $(OBJS) $(UNITY_OBJ) | $(BUILD)
+$(BUILD)/%: tests/%.c $(OBJS) $(UNITY_OBJ) $(CAPTURE_OBJS) | $(BUILD)
 	$(CC) $(UNITY_CFLAGS) $^ -o $@
 
 #generating .o files for unity
 $(UNITY_OBJ): $(UNITY_SRC) | $(OBJDIR)
 	$(CC) $(UNITY_CFLAGS) -c $< -o $@
 
-#generating .o files for mains
+#generating .o files in obj/
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#generate .o files from tests
+$(OBJDIR)/%.o: tests/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#generating main.o file
+$(OBJDIR)/main.o: main.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #specific test run
@@ -105,3 +122,7 @@ help:
 	@echo "  test   - Run unit tests"
 	@echo "  run-%  - Run a specific test"
 	@echo "  valgrind-tests - Run all tests under Valgrind"
+
+print-tests:
+	@echo "TESTS: $(TESTS)"
+	@echo "TEST_BINS: $(TEST_BINS)"

@@ -1,6 +1,8 @@
 #include "capture.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 static int pipefd[2];
 static int saved_stderr = -1;

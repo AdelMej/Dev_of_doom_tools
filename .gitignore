@@ -1,0 +1,25 @@
+# Ignore everything by default
+*
+
+# Un-ignore all .c files
+!*.c
+
+# But ignore all *-main.c files explicitly
+*-main.c
+
+# Un-ignore specific header files and other needed files
+!binary_trees.h
+!README.md
+!.gitignore
+!Makefile
+
+# Un-ignore tests folder and all files inside recursively
+!tests/
+!tests/**
+
+# Un-ignore unity folder and all files inside recursively
+!Unity/
+!Unity/**
+
+# Ignore build output folder
+build/
