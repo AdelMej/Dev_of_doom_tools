@@ -93,6 +93,6 @@ These templates make it easy to test your setup and add new features or tests wi
 ## 📋 Project Management
 
 Track tasks, features, and bugs on our Trello board:  
-🔗 [Dev_of_doom_tools Trello Board](https://trello.com/your-board-link)
+🔗 [Dev_of_doom_tools Trello Board](https://trello.com/b/GjTcHyyT/template)
 
 Happy coding! 💻🔥 Tools for the fallen you'll find all you need to fight against c shenanigans
