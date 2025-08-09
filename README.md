@@ -16,7 +16,6 @@ A template project for building and testing C programs following Holberton-style
 
 ## 🗂️ Project Structure
 ```yaml
-```
 Dev_of_doom_tools/
 ├── holberton/
 │ └── -main.c # Holberton main source files
@@ -28,7 +27,6 @@ Dev_of_doom_tools/
 ├── build/ # Binaries (generated)
 ├── Makefile
 └── .gitignore
-```
 ```
 
 
