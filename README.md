@@ -92,7 +92,13 @@ These templates make it easy to test your setup and add new features or tests wi
 
 ## 📋 Project Management
 
-Track tasks, features, and bugs on our Trello board:  
-🔗 [Dev_of_doom_tools Trello Board](https://trello.com/b/GjTcHyyT/template)
+To keep track of tasks, bugs, and features efficiently, we use a Trello template board designed specifically for coding projects like this one.
+
+Check out the [Trello Template Board](https://trello.com/b/GjTcHyyT/template) to get started with the same workflow, labels, and card templates! Feel free to copy it and customize it for your own projects. 🚀✨
+
+For detailed instructions on how to set up and use Trello for your projects, see the [Trello Setup Guide](https://github.com/AdelMej/Dev_of_doom_tools/blob/main/TRELLO_GUIDE.md) (replace with your actual guide URL).
+
+Happy organizing! 📅🛠️
+
 
 Happy coding! 💻🔥 Tools for the fallen you'll find all you need to fight against c shenanigans
