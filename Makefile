@@ -16,7 +16,7 @@ MAIN_BINS = $(patsubst %.c, $(BUILD)/%, $(notdir $(MAIN_SRCS)))
 MAIN_OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(notdir $(MAIN_SRCS)))
 
 #custom main.c
-MY_MAIN_BIN = $(BUILD)/my_main
+MY_MAIN_BIN = $(BUILD)/shell
 
 # List of all your .c source files except tests
 SRC_BETTY = $(filter-out tests/%, $(wildcard *.c) holberton/*.c)
@@ -104,7 +104,7 @@ $(OBJDIR)/%.o: tests/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #generating main.o file
-$(OBJDIR)/main.o: main.c | $(OBJDIR)
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #specific test run
